@@ -6,7 +6,9 @@ module.exports = {
       colors: {
         varxen: {
           100: '#5A50FF',
-          200: '#8000FF'
+          200: '#8000FF',
+          300: '#1F1C59',
+          400: '#423BBF'
         }
       }
     },

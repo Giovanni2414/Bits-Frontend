@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 const SignIn = () => {
 
     const [formData, setFormData] = useState({
-        usename: '',
+        email: '',
         password: ''
     });
 
@@ -13,20 +13,8 @@ const SignIn = () => {
     };
 
     const handleSubmit = async (event) => {
-        
-        console.log("entra")
         event.preventDefault();
-
-        const data = new FormData(event.currentTarget);
-        
-        console.log(data.get('email'))
-        console.log(data.get('password'))
-    }
-
-    const test = (event) => {
-        event.preventDefault();
-        console.log("entra")
-        
+        console.log(formData)
     }
 
     return (
@@ -43,24 +31,28 @@ const SignIn = () => {
                         </div>
                     </div>
                     <div className="flex justify-center self-center  z-10">
-                        <form className="p-12 bg-white mx-auto rounded-2xl w-100" onSubmit={test}>
+                        <form className="p-12 bg-white mx-auto rounded-2xl w-100 dark:bg-neutral-800" onSubmit={handleSubmit}>
                             <div className="mb-4">
-                                <h3 className="font-semibold text-2xl text-gray-800">Sign In </h3>
-                                <p className="text-gray-500">Please sign in to your account.</p>
+                                <div className='flex justify-center mb-5'>
+                                    <img src='./images/logo-varxen-vector.svg' alt='imagen varxen' className='w-[200px] dark:hidden'></img>
+                                    <img src='./images/logo-varxen-vector-dark.svg' alt='imagen varxen' className='w-[200px] hidden dark:block'></img>
+                                </div>
+                                <h3 className="font-semibold text-2xl text-gray-800 dark:text-white">Sign In </h3>
+                                <p className="text-gray-500 dark:text-white">Please sign in to your account.</p>
                             </div>
                             <div className="space-y-5">
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium text-gray-700 tracking-wide">Email</label>
-                                    <input className=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-varxen-100" type="mail" placeholder="mail@gmail.com" name='email'/>
+                                    <label className="text-sm font-medium text-gray-700 tracking-wide dark:text-white">Email</label>
+                                    <input className=" w-full bg-white text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-varxen-100 dark:bg-neutral-400 dark:text-white dark:placeholder-neutral-300 dark:border-neutral-300 dark:focus:border-varxen-200" type="mail" name='email' id='email' placeholder="email@example.com" onChange={handleChange} />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="mb-5 text-sm font-medium text-gray-700 tracking-wide">Password</label>
-                                    <input className="w-full content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-varxen-100" type="password" placeholder="Enter your password" id='password' />
+                                    <label className="mb-5 text-sm font-medium text-gray-700 tracking-wide dark:text-white">Password</label>
+                                    <input className="w-full bg-white content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-varxen-100 dark:bg-neutral-400 dark:text-white dark:placeholder-neutral-300 dark:border-neutral-300 dark:focus:border-varxen-200" type="password" name='password' id='password' placeholder="Enter your password" onChange={handleChange} />
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center">
                                         <input id="remember_me" name="remember_me" type="checkbox" className="h-4 w-4 bg-blue-500 focus:ring-blue-400 border-gray-300 rounded" />
-                                        <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-800">
+                                        <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-800 dark:text-white">
                                             Remember me
                                         </label>
                                     </div>
@@ -79,7 +71,7 @@ const SignIn = () => {
                             <div className="pt-5 text-center text-gray-400 text-xs">
                                 <span>
                                     Copyright © 2021-2022
-                                    {/* <a href="https://codepen.io/uidesignhub" rel="" target="_blank" title="Ajimon" className="text-green hover:text-green-500">AJI</a>*/}</span> 
+                                    {/* <a href="https://codepen.io/uidesignhub" rel="" target="_blank" title="Ajimon" className="text-green hover:text-green-500">AJI</a>*/}</span>
                             </div>
                         </form>
                     </div>

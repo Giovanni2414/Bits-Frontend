@@ -42,7 +42,7 @@ function SignUp() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen bg-varxen-100">
       <div className="flex justify-center self-center  z-10 shadow-md rounded-xl">
         <form
           className="p-12 bg-white mx-auto rounded-2xl w-100 dark:bg-neutral-800"

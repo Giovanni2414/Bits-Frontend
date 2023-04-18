@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-export const LOGIN = 'realms/keycloak-react-auth/protocol/openid-connect/token'
+//export const LOGIN = 'realms/keycloak-react-auth/protocol/openid-connect/token'
+export const LOGIN = 'login'
 export const REGISTER = 'users' 
 
 export class CRUDService {

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { CRUDService, LOGIN } from "../Services/axiosService";
 import { Link } from "react-router-dom";
-import * as qs from 'qs'
 
 const SignIn = () => {
   const [formData, setFormData] = useState({
@@ -17,20 +16,21 @@ const SignIn = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const data = qs.stringify({
-      client_id: "react-client",
+    const data = {
       username: formData.email,
       password: formData.password,
-      grant_type: "password",
-    });
-
+    };
+    
     const params = {
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      headers: { "Content-Type": "application/json" },
       data: data,
     };
 
     CRUDService.post(params, LOGIN).then((res) => {
       console.log(res);
+      let token = res.data.access_token
+      console.log(token)
+      localStorage.setItem("token",token);
     });
   };
 

@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { CRUDService, SESSIONS } from "../Services/axiosService";
 
 function Session() {
   const [session, setSession] = useState([]);
 
   useEffect(() => {
-    //TODO peticion to back
-  });
+    const handlerSessions = async () => {
+      const answer = CRUDService.getAll(SESSIONS);
+      console.log(answer)
+      setSession(answer)
+    }
+    handlerSessions().catch(console.error)
+  }, []);
+  
+  
 
   let tb_data = session.map((item) => {
     return (

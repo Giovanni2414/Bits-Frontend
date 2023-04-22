@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { CRUDService, LOGIN } from "../Services/axiosService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { HttpStatusCode } from "axios";
 
 const SignIn = () => {
+
+  const navigate = useNavigate()
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -31,6 +35,9 @@ const SignIn = () => {
       let token = res.data.access_token
       console.log(token)
       localStorage.setItem("token",token);
+      if(res.status === HttpStatusCode.Ok){
+        navigate('VarxenPerformance')
+      }
     });
   };
 
@@ -43,7 +50,7 @@ const SignIn = () => {
             "url(https://images.pexels.com/photos/3861972/pexels-photo-3861972.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)",
         }}
       >
-        <div className="absolute bg-gradient-to-b from-varxen-100 to-varxen-200 opacity-70 inset-0 z-0"></div>
+        <div className="absolute bg-gradient-to-b from-varxen-primaryPurple to-varxen-secundaryPurple opacity-70 inset-0 z-0"></div>
         <div className="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
           <div className="flex-col flex  self-center p-10 sm:max-w-5xl xl:max-w-2xl  z-10">
             <div className="self-start hidden lg:flex flex-col  text-white">
@@ -89,7 +96,7 @@ const SignIn = () => {
                     Email
                   </label>
                   <input
-                    className=" w-full bg-white text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-varxen-100 dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-200"
+                    className=" w-full bg-white text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-varxen-primaryPurple dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-secundaryPurple"
                     type="mail"
                     name="email"
                     id="email"
@@ -102,7 +109,7 @@ const SignIn = () => {
                     Password
                   </label>
                   <input
-                    className="w-full bg-white content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-varxen-100 dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-200"
+                    className="w-full bg-white content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-varxen-primaryPurple dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-secundaryPurple"
                     type="password"
                     name="password"
                     id="password"
@@ -128,7 +135,7 @@ const SignIn = () => {
                   <div className="text-sm">
                     <a
                       href="#Temporal"
-                      className="text-varxen-100 hover:text-varxen-200"
+                      className="text-varxen-primaryPurple hover:text-varxen-secundaryPurple"
                     >
                       Forgot your password?
                     </a>
@@ -137,14 +144,14 @@ const SignIn = () => {
                 <div>
                   <button
                     type="submit"
-                    className="w-full flex justify-center bg-varxen-100 hover:bg-varxen-200 text-gray-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
+                    className="w-full flex justify-center bg-varxen-primaryPurple hover:bg-varxen-secundaryPurple text-gray-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
                   >
                     Sign in
                   </button>
                   <div className="text-sm text-center mt-5">
                     <Link
                       to="/SignUp"
-                      className="text-varxen-100 hover:text-varxen-200"
+                      className="text-varxen-primaryPurple hover:text-varxen-secundaryPurple"
                     >
                       Dont have an account? Sign Up
                     </Link>

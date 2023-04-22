@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 function Navbar() {
   return (
     <div>
-      <nav className="bg-varxen-100 border-gray-200 dark:bg-gray-900">
+      <nav className="bg-varxen-primaryPurple border-gray-200 dark:bg-varxen-secondaryPurple">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="https://www.varxen.com/" className="flex items-center bg-gray-100 rounded-lg">
+            <a href="https://www.varxen.com/" className="flex items-center bg-varxen-primaryBlack rounded-2xl p-2">
               <img
-                src="./images/logo-varxen-vector(only-logo).svg"
+                src="./images/logo-varxen-vector-dark(only-logo).svg"
                 className="h-8 w-12 mr-3"
                 alt="Varxen Logo"
               />
@@ -32,9 +32,9 @@ function Navbar() {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 ></path>
               </svg>
             </button>
@@ -42,20 +42,20 @@ function Navbar() {
               className="hidden w-full md:block md:w-auto"
               id="navbar-default"
             >
-              <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-varxen-100 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-varxen-100 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                <li className="bg-varxen-100">
+              <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:border-gray-700">
+                <li className="bg-varxen-primaryPurple">
                   <Link
                     to="/VarxenPerformance/Session"
-                    className="block py-2 pl-3 pr-4 text-white bg-varxen-100 rounded md:bg-transparent md:text-black md:p-0 dark:text-white md:dark:text-blue-500"
+                    className="block py-2 pl-3 pr-4 text-varxen-secundaryWhite rounded md:bg-transparent md:p-0 dark:text-varxen-secundaryWhite dark:hover:text-varxen-primaryBlack"
                     aria-current="page"
                   >
                     Sessions
                   </Link>
                 </li>
-                <li className="bg-varxen-100">
+                <li className="bg-varxen-primaryPurple">
                   <a
                     href="/#"
-                    className="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-varxen-100 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                    className="block py-2 pl-3 pr-4 text-varxen-secundaryWhite rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-white dark:hover:text-varxen-primaryBlack"
                   >
                     Another
                   </a>

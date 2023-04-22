@@ -3,6 +3,8 @@ import axios from 'axios'
 //export const LOGIN = 'realms/keycloak-react-auth/protocol/openid-connect/token'
 export const LOGIN = 'login'
 export const REGISTER = 'users' 
+export const SESSIONS = 'sessions'
+export const BLOBS = 'blobs'
 
 export class CRUDService {
 
@@ -27,6 +29,29 @@ export class CRUDService {
                     console.log('Error', error.message);
                 }
             });
+    }
+
+    static getAll(serviceRoute) {
+
+        var url = this.baseURL + serviceRoute;
+        console.log(url)
+
+        const config = this.getHeaderConfig();
+        console.log(config)
+
+        return axios.get(
+            url, config
+        ).then(res => res.data);
+    }
+
+    static getHeaderConfig(){
+
+        const webToken = localStorage.getItem("token")?localStorage.getItem("token"):'';
+
+        const config = {
+            headers: { Authorization: 'Bearer '+ webToken}
+        };
+        return config;
     }
 
 }

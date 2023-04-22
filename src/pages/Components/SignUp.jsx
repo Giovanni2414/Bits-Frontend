@@ -42,7 +42,7 @@ function SignUp() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-varxen-100">
+    <div className="flex justify-center items-center h-screen bg-varxen-primaryPurple">
       <div className="flex justify-center self-center  z-10 shadow-md rounded-xl">
         <form
           className="p-12 bg-white mx-auto rounded-2xl w-100 dark:bg-neutral-800"
@@ -78,7 +78,7 @@ function SignUp() {
                     Email
                   </label>
                   <input
-                    className=" w-full bg-white text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-varxen-100 dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-200"
+                    className=" w-full bg-white text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-varxen-primaryPurple dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-secundaryPurple"
                     type="mail"
                     name="email"
                     id="email"
@@ -91,7 +91,7 @@ function SignUp() {
                     First Name
                   </label>
                   <input
-                    className=" w-full bg-white text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-varxen-100 dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-200"
+                    className=" w-full bg-white text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-varxen-primaryPurple dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-secundaryPurple"
                     type="text"
                     name="firstname"
                     id="firstname"
@@ -104,7 +104,7 @@ function SignUp() {
                     Organization Name
                   </label>
                   <input
-                    className=" w-full bg-white text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-varxen-100 dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-200"
+                    className=" w-full bg-white text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-varxen-primaryPurple dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-secundaryPurple"
                     type="text"
                     name="organizationName"
                     id="organizationName"
@@ -119,7 +119,7 @@ function SignUp() {
                     Username
                   </label>
                   <input
-                    className=" w-full bg-white text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-varxen-100 dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-200"
+                    className=" w-full bg-white text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-varxen-primaryPurple dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-secundaryPurple"
                     type="text"
                     name="username"
                     id="username"
@@ -132,7 +132,7 @@ function SignUp() {
                     Last Name
                   </label>
                   <input
-                    className=" w-full bg-white text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-varxen-100 dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-200"
+                    className=" w-full bg-white text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-varxen-primaryPurple dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-secundaryPurple"
                     type="text"
                     name="lastname"
                     id="lastname"
@@ -145,7 +145,7 @@ function SignUp() {
                     Password
                   </label>
                   <input
-                    className="w-full bg-white content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-varxen-100 dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-200"
+                    className="w-full bg-white content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-varxen-primaryPurple dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-secundaryPurple"
                     type="password"
                     name="password"
                     id="password"
@@ -158,12 +158,12 @@ function SignUp() {
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center bg-varxen-100 hover:bg-varxen-200 text-gray-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
+                className="w-full flex justify-center bg-varxen-primaryPurple hover:bg-varxen-secundaryPurple text-gray-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
               >
                 Sign up
               </button>
               <div className="flex justify-center items-center mt-4">
-                <Link to="/" className="text-varxen-100 hover:text-varxen-200">
+                <Link to="/" className="text-varxen-primaryPurple hover:text-varxen-secundaryPurple">
                   Already have an account? Sign In
                 </Link>
               </div>

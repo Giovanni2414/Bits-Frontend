@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { CRUDService, LOGIN } from "../Services/axiosService";
 import { Link, useNavigate } from "react-router-dom";
 import { HttpStatusCode } from "axios";
+import { useDispatch } from 'react-redux';
+import { login } from "../../reducers/authSlice.js";
 
 const SignIn = () => {
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const [formData, setFormData] = useState({
     email: "",
@@ -31,12 +34,18 @@ const SignIn = () => {
     };
 
     CRUDService.post(params, LOGIN).then((res) => {
-      console.log(res);
       let token = res.data.access_token
-      console.log(token)
       localStorage.setItem("token",token);
       if(res.status === HttpStatusCode.Ok){
-        navigate('VarxenPerformance')
+        const information = {
+          access_token:res.data.access_token,
+          expires_in: res.data.expires_in,
+          token_type: res.data.token_type,
+          username: res.data.username
+        }
+
+        dispatch(login({ information }))
+        navigate('VarxenPerformance/Session')
       }
     });
   };

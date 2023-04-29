@@ -34,10 +34,8 @@ export class CRUDService {
     static getAll(serviceRoute) {
 
         var url = this.baseURL + serviceRoute;
-        console.log(url)
 
         const config = this.getHeaderConfig();
-        console.log(config)
 
         return axios.get(
             url, config

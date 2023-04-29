@@ -6,9 +6,9 @@ function Session() {
 
   useEffect(() => {
     const handlerSessions = async () => {
-      const answer = CRUDService.getAll(SESSIONS);
-      console.log(answer)
+      const answer = await CRUDService.getAll(SESSIONS);
       setSession(answer)
+      console.log(answer)
     }
     handlerSessions().catch(console.error)
   }, []);
@@ -76,10 +76,10 @@ function Session() {
               </td>
               <td>dd/mm/aa</td>
               <th>
-                <button className="btn btn-ghost btn-xs">Edit</button>
+                <button className="btn btn btn-xs bg-varxen-primaryPurple border-0 hover:bg-varxen-secundaryPurple text-varxen-secundaryWhite">Edit</button>
               </th>
               <th>
-                <button className="btn btn-ghost btn-xs">Configure</button>
+                <button className="btn btn btn-xs bg-varxen-primaryPurple border-0 hover:bg-varxen-secundaryPurple text-varxen-secundaryWhite">Configure</button>
               </th>
             </tr>
             {tb_data}
@@ -89,7 +89,7 @@ function Session() {
             <tr>
               <th></th>
               <th>Name</th>
-              <th>Job</th>
+              <th>Date</th>
               <th></th>
               <th></th>
             </tr>

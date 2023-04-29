@@ -1,14 +1,26 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { logout } from "../../reducers/authSlice";
 
 function Navbar() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const logoutAction = () => {
+    
+    dispatch(logout())
+    navigate('/')
+  }
+
   return (
     <div>
       <nav className="bg-varxen-primaryPurple border-gray-200 dark:bg-varxen-secondaryPurple">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="https://www.varxen.com/" className="flex items-center bg-varxen-primaryBlack rounded-2xl p-2">
               <img
-                src="./images/logo-varxen-vector-dark(only-logo).svg"
+                src="../images/logo-varxen-vector-dark(only-logo).svg"
                 className="h-8 w-12 mr-3"
                 alt="Varxen Logo"
               />
@@ -53,12 +65,12 @@ function Navbar() {
                   </Link>
                 </li>
                 <li className="bg-varxen-primaryPurple">
-                  <a
-                    href="/#"
+                  <button
+                    onClick={logoutAction}
                     className="block py-2 pl-3 pr-4 text-varxen-secundaryWhite rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-white dark:hover:text-varxen-primaryBlack"
                   >
-                    Another
-                  </a>
+                    Logout
+                  </button>
                 </li>
               </ul>
             </div>

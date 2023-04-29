@@ -43,30 +43,23 @@ function Session() {
 
   return (
     <div>
-      <div className="overflow-x-auto w-full">
+      <div className="m-3 flex-row" >
+        <input type="text" placeholder="Search session" className="input input-bordered w-11/12 rounded-3xl mr-3" />
+        <button className="btn rounded-3xl">Buscar</button>
+      </div>
+      <div className="overflow-x-auto w-full p-3">
         <table className="table w-full">
           {/* head */}
           <thead>
             <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
               <th>Name</th>
               <th>Date</th>
-              <th></th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
             <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
               <td>
                 <div className="flex items-center space-x-3">
                   <div>
@@ -76,24 +69,11 @@ function Session() {
               </td>
               <td>dd/mm/aa</td>
               <th>
-                <button className="btn btn btn-xs bg-varxen-primaryPurple border-0 hover:bg-varxen-secundaryPurple text-varxen-secundaryWhite">Edit</button>
-              </th>
-              <th>
-                <button className="btn btn btn-xs bg-varxen-primaryPurple border-0 hover:bg-varxen-secundaryPurple text-varxen-secundaryWhite">Configure</button>
+                <button className="btn btn-error btn-xs ">Eliminar</button>
               </th>
             </tr>
             {tb_data}
           </tbody>
-          {/* foot */}
-          <tfoot>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Date</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </tfoot>
         </table>
       </div>
     </div>

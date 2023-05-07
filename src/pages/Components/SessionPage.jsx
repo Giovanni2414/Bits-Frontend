@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { CRUDService, SESSIONS } from "../Services/axiosService";
-import { MdDeleteForever, MdModeEdit } from "react-icons/md";
+import {
+  MdDeleteForever,
+  MdModeEdit,
+  MdOutlineWarningAmber,
+} from "react-icons/md";
 
 function Session() {
   const [session, setSession] = useState([]);
@@ -17,7 +21,7 @@ function Session() {
   let tb_data = session.map((item) => {
     count += 1;
     return (
-      <tr key={item.sessionId} >
+      <tr key={item.sessionId}>
         <td>{count}</td>
         <td>
           <div className="flex items-center space-x-3">
@@ -28,8 +32,12 @@ function Session() {
         </td>
         <td>{item.creationDate}</td>
         <td>
-          <button><MdDeleteForever fill="#FF0000" size={24}/></button>
-          <button className="ml-4"><MdModeEdit fill="#8b8d90" size={24}/></button>
+          <button>
+            <MdDeleteForever fill="#FF0000" size={24} />
+          </button>
+          <button className="ml-4">
+            <MdModeEdit fill="#8b8d90" size={24} />
+          </button>
         </td>
       </tr>
     );
@@ -56,27 +64,13 @@ function Session() {
                 <th></th>
               </tr>
             </thead>
-            <tbody>
-              {tb_data}
-            </tbody>
+            <tbody>{tb_data}</tbody>
           </table>
         ) : (
           <div>
-            <div className="alert alert-info shadow-lg">
+            <div className="alert alert-warning shadow-lg ">
               <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  className="stroke-current flex-shrink-0 w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  ></path>
-                </svg>
+                <MdOutlineWarningAmber size={24}/>
                 <span>You dont have any recorded session</span>
               </div>
             </div>

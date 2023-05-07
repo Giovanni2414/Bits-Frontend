@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CRUDService, SESSIONS } from "../Services/axiosService";
+import { MdDeleteForever, MdModeEdit } from "react-icons/md";
 
 function Session() {
   const [session, setSession] = useState([]);
@@ -7,22 +8,17 @@ function Session() {
   useEffect(() => {
     const handlerSessions = async () => {
       const answer = await CRUDService.getAll(SESSIONS);
-      setSession(answer)
-      console.log(answer)
-    }
-    handlerSessions().catch(console.error)
+      setSession(answer);
+    };
+    handlerSessions().catch(console.error);
   }, []);
-  
-  
 
+  var count = 0;
   let tb_data = session.map((item) => {
+    count += 1;
     return (
-      <tr key={item.sessionId}>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
+      <tr key={item.sessionId} >
+        <td>{count}</td>
         <td>
           <div className="flex items-center space-x-3">
             <div>
@@ -31,50 +27,61 @@ function Session() {
           </div>
         </td>
         <td>{item.creationDate}</td>
-        <th>
-          <button className="btn btn-ghost btn-xs">Edit</button>
-        </th>
-        <th>
-          <button className="btn btn-ghost btn-xs">Configure</button>
-        </th>
+        <td>
+          <button><MdDeleteForever fill="#FF0000" size={24}/></button>
+          <button className="ml-4"><MdModeEdit fill="#8b8d90" size={24}/></button>
+        </td>
       </tr>
     );
   });
 
   return (
     <div>
-      <div className="m-3 flex-row" >
-        <input type="text" placeholder="Search session" className="input input-bordered w-11/12 rounded-3xl mr-3" />
-        <button className="btn rounded-3xl">Buscar</button>
+      <div className="m-3 flex-row">
+        <input
+          type="text"
+          placeholder="Search session"
+          className="input input-bordered w-11/12 rounded-3xl mr-3"
+        />
+        <button className="btn rounded-3xl">Search</button>
       </div>
       <div className="overflow-x-auto w-full p-3">
-        <table className="table w-full">
-          {/* head */}
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Date</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row 1 */}
-            <tr>
-              <td>
-                <div className="flex items-center space-x-3">
-                  <div>
-                    <div className="font-bold">Hart Hagerty</div>
-                  </div>
-                </div>
-              </td>
-              <td>dd/mm/aa</td>
-              <th>
-                <button className="btn btn-error btn-xs ">Eliminar</button>
-              </th>
-            </tr>
-            {tb_data}
-          </tbody>
-        </table>
+        {session.length !== 0 ? (
+          <table className="table w-full">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {tb_data}
+            </tbody>
+          </table>
+        ) : (
+          <div>
+            <div className="alert alert-info shadow-lg">
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  className="stroke-current flex-shrink-0 w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path>
+                </svg>
+                <span>You dont have any recorded session</span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

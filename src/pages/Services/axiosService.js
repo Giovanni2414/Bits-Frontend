@@ -5,6 +5,7 @@ export const LOGIN = 'login'
 export const REGISTER = 'users' 
 export const SESSIONS = 'sessions'
 export const BLOBS = 'blobs'
+export const SESSIONS_NAME = 'sessions/search'
 
 export class CRUDService {
 
@@ -37,6 +38,15 @@ export class CRUDService {
 
         const config = this.getHeaderConfig();
         console.log(config)
+        return axios.get(
+            url, config
+        ).then(res => res.data);
+    }
+    
+    static getOne(serviceRoute, itemID){
+        const url = this.baseURL + serviceRoute + '/' + itemID
+        const config = this.getHeaderConfig();
+
         return axios.get(
             url, config
         ).then(res => res.data);

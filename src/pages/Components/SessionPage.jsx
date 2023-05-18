@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { CRUDService, SESSIONS } from "../Services/axiosService";
+import { CRUDService, SESSIONS, SESSIONS_NAME } from "../Services/axiosService";
 import {
   MdDeleteForever,
   MdModeEdit,
   MdOutlineWarningAmber,
 } from "react-icons/md";
+import Swal from "sweetalert2";
 
 function Session() {
   const [session, setSession] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const handlerSessions = async () => {
@@ -16,6 +18,34 @@ function Session() {
     };
     handlerSessions().catch(console.error);
   }, []);
+
+  const saveSearchValue = () => {
+    setSearch(document.getElementById("searchInput").value);
+  };
+
+  const getSession = async (event) => {
+    event.preventDefault();
+    
+    console.log('entra')
+    if (search !== "") {
+      const answer = await CRUDService.getOne(SESSIONS_NAME, search);
+      if (answer.length === 0) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "The name entered does not exist!",
+        });
+      } else {
+        setSession(answer);
+      }
+    } else {
+      Swal.fire(
+        "Do you want to search?",
+        "You must enter a session name to be able to search for it.",
+        "question"
+      );
+    }
+  };
 
   var count = 0;
   let tb_data = session.map((item) => {
@@ -46,12 +76,21 @@ function Session() {
   return (
     <div>
       <div className="m-3 flex-row">
-        <input
-          type="text"
-          placeholder="Search session"
-          className="input input-bordered w-11/12 rounded-3xl mr-3"
-        />
-        <button className="btn rounded-3xl">Search</button>
+        <form onSubmit={getSession}>
+          <input
+            type="text"
+            placeholder="Search session"
+            className="input input-bordered w-11/12 rounded-3xl mr-3"
+            id="searchInput"
+            onChange={saveSearchValue}
+          />
+          <button
+            type="submit"
+            className="btn rounded-3xl"
+          >
+            Search
+          </button>
+        </form>
       </div>
       <div className="overflow-x-auto w-full p-3">
         {session.length !== 0 ? (
@@ -70,7 +109,7 @@ function Session() {
           <div>
             <div className="alert alert-warning shadow-lg ">
               <div>
-                <MdOutlineWarningAmber size={24}/>
+                <MdOutlineWarningAmber size={24} />
                 <span>You dont have any recorded session</span>
               </div>
             </div>

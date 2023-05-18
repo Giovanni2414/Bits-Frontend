@@ -19,14 +19,14 @@ function Session() {
     handlerSessions().catch(console.error);
   }, []);
 
-  const saveSearchValue = () => {
-    setSearch(document.getElementById("searchInput").value);
+  const saveSearchValue = (event) => {
+    const {value} = event.target;
+    setSearch(value);
   };
 
   const getSession = async (event) => {
     event.preventDefault();
-    
-    console.log('entra')
+  
     if (search !== "") {
       const answer = await CRUDService.getOne(SESSIONS_NAME, search);
       if (answer.length === 0) {
@@ -81,7 +81,7 @@ function Session() {
             type="text"
             placeholder="Search session"
             className="input input-bordered w-11/12 rounded-3xl mr-3"
-            id="searchInput"
+            name="searchInput"
             onChange={saveSearchValue}
           />
           <button

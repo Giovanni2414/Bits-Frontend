@@ -6,8 +6,9 @@ import {
   MdOutlineWarningAmber,
 } from "react-icons/md";
 import Swal from "sweetalert2";
+import { Link } from 'react-router-dom'
 
-function Session() {
+function Session(props) {
   const [session, setSession] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -20,13 +21,13 @@ function Session() {
   }, []);
 
   const saveSearchValue = (event) => {
-    const {value} = event.target;
+    const { value } = event.target;
     setSearch(value);
   };
 
   const getSession = async (event) => {
     event.preventDefault();
-  
+
     if (search !== "") {
       const answer = await CRUDService.getOne(SESSIONS_NAME, search);
       if (answer.length === 0) {
@@ -65,9 +66,11 @@ function Session() {
           <button>
             <MdDeleteForever fill="#FF0000" size={24} />
           </button>
-          <button className="ml-4">
-            <MdModeEdit fill="#8b8d90" size={24} />
-          </button>
+          <Link to={`/VarxenPerformance/EditSession/${item.sessionId}`}>
+            <button className="ml-4">
+              <MdModeEdit fill="#8b8d90" size={24} />
+            </button>
+          </Link>
         </td>
       </tr>
     );
@@ -84,10 +87,7 @@ function Session() {
             name="searchInput"
             onChange={saveSearchValue}
           />
-          <button
-            type="submit"
-            className="btn rounded-3xl"
-          >
+          <button type="submit" className="btn rounded-3xl">
             Search
           </button>
         </form>

@@ -37,7 +37,6 @@ export class CRUDService {
         var url = this.baseURL + serviceRoute;
 
         const config = this.getHeaderConfig();
-        console.log(config)
         return axios.get(
             url, config
         ).then(res => res.data);
@@ -50,6 +49,15 @@ export class CRUDService {
         return axios.get(
             url, config
         ).then(res => res.data);
+    }
+
+    static delete(serviceRoute, itemID){
+        const url = this.baseURL + serviceRoute + '/' + itemID
+        const config = this.getHeaderConfig();
+
+        return axios.delete(
+            url, config
+        ).then(res => res);
     }
 
     static getHeaderConfig(){

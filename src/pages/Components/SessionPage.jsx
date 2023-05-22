@@ -6,9 +6,9 @@ import {
   MdOutlineWarningAmber,
 } from "react-icons/md";
 import Swal from "sweetalert2";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
-function Session(props) {
+function Session() {
   const [session, setSession] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -23,6 +23,23 @@ function Session(props) {
   const saveSearchValue = (event) => {
     const { value } = event.target;
     setSearch(value);
+  };
+
+  const deleteSession = async (sessionId) => {
+    Swal.fire({
+      title: "Do you want to delete the session?",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete",
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        CRUDService.delete(SESSIONS, sessionId).then(async () => {
+          const listSessions = await CRUDService.getAll(SESSIONS);
+          setSession(listSessions);
+        });
+        Swal.fire("Deleted!", "", "success");
+      }
+    });
   };
 
   const getSession = async (event) => {
@@ -63,7 +80,7 @@ function Session(props) {
         </td>
         <td>{item.creationDate}</td>
         <td>
-          <button>
+          <button onClick={() => deleteSession(item.sessionId)}>
             <MdDeleteForever fill="#FF0000" size={24} />
           </button>
           <Link to={`/VarxenPerformance/EditSession/${item.sessionId}`}>

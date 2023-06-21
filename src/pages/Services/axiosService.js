@@ -11,8 +11,8 @@ export const SESSIONS_NAME = 'sessions/search'
 
 export class CRUDService {
 
-    static baseURL = 'http://' + env.REACT_APP_BACKEND_URL + ':' + env.REACT_APP_BACKEND_PORT + '/'
-
+    //static baseURL = 'http://' + env.REACT_APP_BACKEND_URL + ':' + env.REACT_APP_BACKEND_PORT + '/'
+    static baseURL = "";
     static post(postInformation, serviceRoute) {
 
         var url = this.baseURL + serviceRoute

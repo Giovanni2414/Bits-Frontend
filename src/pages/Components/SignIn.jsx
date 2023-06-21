@@ -27,7 +27,7 @@ const SignIn = () => {
       username: formData.email,
       password: formData.password,
     };
-    
+
     const params = {
       headers: { "Content-Type": "application/json" },
       data: data,
@@ -35,10 +35,10 @@ const SignIn = () => {
 
     CRUDService.post(params, LOGIN).then((res) => {
       let token = res.data.access_token
-      localStorage.setItem("token",token);
-      if(res.status === HttpStatusCode.Ok){
+      localStorage.setItem("token", token);
+      if (res.status === HttpStatusCode.Ok) {
         const information = {
-          access_token:res.data.access_token,
+          access_token: res.data.access_token,
           expires_in: res.data.expires_in,
           token_type: res.data.token_type,
           username: res.data.username

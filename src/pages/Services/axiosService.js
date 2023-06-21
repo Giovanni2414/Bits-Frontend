@@ -1,4 +1,5 @@
 import axios from 'axios'
+import env from 'react-dotenv';
 
 //export const LOGIN = 'realms/keycloak-react-auth/protocol/openid-connect/token'
 export const LOGIN = 'login'
@@ -7,9 +8,10 @@ export const SESSIONS = 'sessions'
 export const BLOBS = 'blobs'
 export const SESSIONS_NAME = 'sessions/search'
 
+
 export class CRUDService {
 
-    static baseURL = 'http://' + process.env.BACKEND_URL + ':' + process.env.BACKEND_PORT + '/'
+    static baseURL = 'http://' + env.BACKEND_URL + ':' + env.BACKEND_PORT + '/'
 
     static post(postInformation, serviceRoute) {
 
@@ -19,7 +21,7 @@ export class CRUDService {
             .then(res => res)
             .catch(function (error) {
                 console.log(url);
-                console.log(process.env.REACT_APP_BACKEND_URL);
+                console.log(env.REACT_APP_BACKEND_URL);
                 if (error.response) {
                     // Request made and server responded
                     alert("ERROR " + error.response.data.code + "\n" + error.response.data.message);

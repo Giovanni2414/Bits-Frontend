@@ -9,7 +9,7 @@ export const SESSIONS_NAME = 'sessions/search'
 
 export class CRUDService {
 
-    static baseURL = 'http://' + process.env.REACT_APP_BACKEND_URL + ':' + process.env.REACT_APP_BACKEND_PORT + '/'
+    static baseURL = 'http://' + process.env.REACT_APP_BACKEND_URL1 + ':' + process.env.REACT_APP_BACKEND_PORT1 + '/'
 
     static post(postInformation, serviceRoute) {
 

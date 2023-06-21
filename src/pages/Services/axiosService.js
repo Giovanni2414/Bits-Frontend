@@ -9,7 +9,7 @@ export const SESSIONS_NAME = 'sessions/search'
 
 export class CRUDService {
 
-    static baseURL = 'http://' + process.env.REACT_APP_BACKEND_URL1 + ':' + process.env.REACT_APP_BACKEND_PORT1 + '/'
+    static baseURL = 'http://' + process.env.REACT_APP_BACKEND_URL + ':' + process.env.REACT_APP_BACKEND_PORT + '/'
 
     static post(postInformation, serviceRoute) {
 
@@ -19,7 +19,7 @@ export class CRUDService {
             .then(res => res)
             .catch(function (error) {
                 console.log(url);
-                console.log(process.env.REACT_APP_BACKEND_URL1);
+                console.log(process.env.REACT_APP_BACKEND_URL);
                 if (error.response) {
                     // Request made and server responded
                     alert("ERROR " + error.response.data.code + "\n" + error.response.data.message);

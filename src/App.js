@@ -5,7 +5,6 @@ import SignUp from './pages/Components/SignUp'
 import VarxenPerformance from './pages/Components/VarxenPerformance';
 import SessionPage from './pages/Components/SessionPage';
 import EditSessionPage from './pages/Components/EditSessionPage';
-import 'dotenv/config';
 
 function App() {
   return (

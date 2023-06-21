@@ -1,5 +1,4 @@
 import axios from 'axios'
-import 'dotenv/config';
 
 //export const LOGIN = 'realms/keycloak-react-auth/protocol/openid-connect/token'
 export const LOGIN = 'login'

@@ -2,14 +2,14 @@ import axios from 'axios'
 
 //export const LOGIN = 'realms/keycloak-react-auth/protocol/openid-connect/token'
 export const LOGIN = 'login'
-export const REGISTER = 'users' 
+export const REGISTER = 'users'
 export const SESSIONS = 'sessions'
 export const BLOBS = 'blobs'
 export const SESSIONS_NAME = 'sessions/search'
 
 export class CRUDService {
 
-    static baseURL = 'http://localhost:8081/'
+    static baseURL = 'http://' + process.env.REACT_APP_BACKEND_URL + ':' + process.env.REACT_APP_BACKEND_PORT + '/'
 
     static post(postInformation, serviceRoute) {
 
@@ -41,8 +41,8 @@ export class CRUDService {
             url, config
         ).then(res => res.data);
     }
-    
-    static getOne(serviceRoute, itemID){
+
+    static getOne(serviceRoute, itemID) {
         const url = this.baseURL + serviceRoute + '/' + itemID
         const config = this.getHeaderConfig();
 
@@ -51,7 +51,7 @@ export class CRUDService {
         ).then(res => res.data);
     }
 
-    static delete(serviceRoute, itemID){
+    static delete(serviceRoute, itemID) {
         const url = this.baseURL + serviceRoute + '/' + itemID
         const config = this.getHeaderConfig();
 
@@ -60,12 +60,12 @@ export class CRUDService {
         ).then(res => res);
     }
 
-    static getHeaderConfig(){
+    static getHeaderConfig() {
 
-        const webToken = localStorage.getItem("token")?localStorage.getItem("token"):'';
+        const webToken = localStorage.getItem("token") ? localStorage.getItem("token") : '';
 
         const config = {
-            headers: { Authorization: 'Bearer '+ webToken}
+            headers: { Authorization: 'Bearer ' + webToken }
         };
         return config;
     }

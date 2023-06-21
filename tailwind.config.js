@@ -10,7 +10,8 @@ module.exports = {
           secundaryPurple: '#683cc0',
           secundaryGray: '#8b8d90',
           secundaryWhite: '#e2e2e2',
-          complementaryPrimaryPurple: '#FCDE88'
+          complementaryPrimaryPurple: '#FCDE88',
+          danger: '#B31312'
         }
       }
     },

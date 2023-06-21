@@ -8,9 +8,9 @@ export const authSlice = createSlice({
 	reducers: {
 		login: (state, action) => {
 			state.value = {
-				access_token: action.payload.token,
-				expire_in: action.payload.expireIn,
-				token_type: action.payload.tokenType,
+				access_token: action.payload.access_token,
+				expire_in: action.payload.expire_in,
+				token_type: action.payload.token_type,
 				username: action.payload.username
 			}
 		},

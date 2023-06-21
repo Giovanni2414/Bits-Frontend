@@ -21,7 +21,7 @@ export class CRUDService {
             .then(res => res)
             .catch(function (error) {
                 console.log(url);
-                console.log(env.REACT_APP_BACKEND_URL);
+                console.log(env);
                 if (error.response) {
                     // Request made and server responded
                     alert("ERROR " + error.response.data.code + "\n" + error.response.data.message);

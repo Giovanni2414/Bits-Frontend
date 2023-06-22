@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 function Session() {
   const [session, setSession] = useState([]);
   const [search, setSearch] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
     const handlerSessions = async () => {
@@ -18,11 +19,14 @@ function Session() {
       setSession(answer);
     };
     handlerSessions().catch(console.error);
-  }, []);
+  }, [isSearching]);
 
   const saveSearchValue = (event) => {
     const { value } = event.target;
     setSearch(value);
+    if(value===""){
+      setIsSearching(!isSearching)
+    }
   };
 
   const deleteSession = async (sessionId) => {

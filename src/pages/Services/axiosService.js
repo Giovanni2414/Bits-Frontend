@@ -10,11 +10,6 @@ export const SESSIONS_NAME = 'sessions/search'
 
 export class CRUDService {
 
-<<<<<<< HEAD
-=======
-    static baseURL = 'http://' + process.env.REACT_APP_BACKEND_URL + ':' + process.env.REACT_APP_BACKEND_PORT + '/'
-
->>>>>>> 48e1da283079ca242ba198e4a7a8bffb991a5dd5
     static post(postInformation, serviceRoute) {
 
         var url = serviceRoute
@@ -46,15 +41,9 @@ export class CRUDService {
             url, config
         ).then(res => res.data);
     }
-<<<<<<< HEAD
     
     static getOne(serviceRoute, itemID){
         const url = serviceRoute + '/' + itemID
-=======
-
-    static getOne(serviceRoute, itemID) {
-        const url = this.baseURL + serviceRoute + '/' + itemID
->>>>>>> 48e1da283079ca242ba198e4a7a8bffb991a5dd5
         const config = this.getHeaderConfig();
 
         return axios.get(
@@ -62,13 +51,8 @@ export class CRUDService {
         ).then(res => res.data);
     }
 
-<<<<<<< HEAD
     static delete(serviceRoute, itemID){
         const url = serviceRoute + '/' + itemID
-=======
-    static delete(serviceRoute, itemID) {
-        const url = this.baseURL + serviceRoute + '/' + itemID
->>>>>>> 48e1da283079ca242ba198e4a7a8bffb991a5dd5
         const config = this.getHeaderConfig();
 
         return axios.delete(

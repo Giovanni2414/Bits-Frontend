@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const instance = axios.create({
-    baseURL:  'http://localhost:8081/'
+    baseURL:  'http://' + process.env.REACT_APP_BACKEND_URL + ':' + process.env.REACT_APP_BACKEND_PORT + '/'
 })
 
 const AxiosInterceptor = ({ children }) => {
     const [isSet, setIsSet] = useState(false)
     const navigate = useNavigate();
+
 
     useEffect(() => {
 

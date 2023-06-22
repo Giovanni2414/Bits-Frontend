@@ -59,7 +59,7 @@ const EditSessionPage = () => {
             type: "multipart/form-data",
           });
 
-          var renamedFile = new File([file], "file.har", { type: file.type });
+          var renamedFile = new File([file], "file.har", { type: "application/har" });
 
           var formdata = new FormData();
           formdata.append("file", renamedFile);

@@ -39,7 +39,6 @@ const SignIn = () => {
       if (res.status === HttpStatusCode.Ok) {
         const information = {
           access_token: res.data.access_token,
-          access_token: res.data.access_token,
           expires_in: res.data.expires_in,
           token_type: res.data.token_type,
           username: res.data.username

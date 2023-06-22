@@ -59,8 +59,10 @@ const EditSessionPage = () => {
             type: "multipart/form-data",
           });
 
+          var renamedFile = new File([file], "file.har", { type: file.type });
+
           var formdata = new FormData();
-          formdata.append("file", file);
+          formdata.append("file", renamedFile);
 
           const paramsBlob = {
             headers: CRUDService.getHeaderConfig(),

@@ -1,19 +1,18 @@
 # ==== CONFIGURE =====
 # Use a Node 16 base image
 FROM node:16-alpine 
-# Set the working directory to /app inside the container
+
+# Establece el directorio de trabajo
 WORKDIR /app
-# Copy app files
+
+# Copia los archivos de tu aplicación React al contenedor
 COPY . .
-# ==== BUILD =====
-# Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
-RUN npm ci 
-# Build the app
-RUN npm run build
-# ==== RUN =======
-# Set the env to "production"
-ENV NODE_ENV production
-# Expose the port on which the app will be running (3000 is the default that `serve` uses)
+
+# Instala las dependencias
+RUN npm install
+
+# Expón el puerto en el que se ejecutará la aplicación
 EXPOSE 3000
-# Start the app
-CMD [ "npx", "serve", "build" ]
+
+# Establece el comando de inicio del contenedor
+CMD ["npm", "start"]

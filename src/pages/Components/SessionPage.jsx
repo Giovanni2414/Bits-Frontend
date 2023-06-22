@@ -84,6 +84,9 @@ function Session() {
         </td>
         <td>{item.creationDate}</td>
         <td>
+          <button>
+            <span>test</span>
+          </button>
           <button onClick={() => deleteSession(item.sessionId)}>
             <MdDeleteForever fill="#FF0000" size={24} />
           </button>

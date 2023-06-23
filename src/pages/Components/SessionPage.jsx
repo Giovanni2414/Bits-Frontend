@@ -1,18 +1,22 @@
 import React, {useEffect, useState} from "react";
-import {CRUDService, SESSIONS, SESSIONS_NAME} from "../Services/axiosService";
+import {CRUDService, LOGIN, SESSIONS, SESSIONS_NAME} from "../Services/axiosService";
 import {
     MdDeleteForever,
     MdModeEdit,
     MdOutlineWarningAmber,
 } from "react-icons/md";
 import Swal from "sweetalert2";
-import {Link} from "react-router-dom";
 import {MdArrowCircleDown} from "react-icons/md";
+import {createSearchParams, Link, useNavigate} from "react-router-dom";
+import {HttpStatusCode} from "axios";
+import {login} from "../../reducers/authSlice";
+
 
 function Session() {
     const [session, setSession] = useState([]);
     const [search, setSearch] = useState("");
     const [isSearching, setIsSearching] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handlerSessions = async () => {
@@ -30,6 +34,58 @@ function Session() {
         }
     };
 
+
+    //Constant that saves the value of the dropdown list
+    const [selectedOption, setSelectedOption] = useState("LOCUST");
+
+    //Constant that saves the value of the weight
+    const [weightValue, setWeightValue] = useState("");
+
+    //Sends the info of the pop-up
+    const createTest = (sessionId) => {
+        setShowModal(false);
+        console.log(selectedOption, " - ", weightValue);
+        if (selectedOption === "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'You must select a framework'
+            })
+            setSelectedOption('LOCUST');
+            return;
+        }
+        if (weightValue < 1) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Value must be equal or higher than one'
+            })
+            setWeightValue("");
+            return;
+        }
+
+        navigate({
+            pathname: "PerformanceTest",
+            search: createSearchParams({
+                testingFrameworkPlatform: selectedOption,
+                weight: weightValue,
+                sessionId: sessionId
+            }).toString()
+        })
+
+    };
+
+    //Cleans the fields on the pop-up when close button is clicked
+    const onClose = () => {
+        setShowModal(false);
+        setSelectedOption('LOCUST');
+        setWeightValue("");
+    }
+
+    //constants to show the pop-up
+    const [showModal, setShowModal] = React.useState(false);
+
+
     const deleteSession = async (sessionId) => {
         Swal.fire({
             title: "Do you want to delete the session?",
@@ -46,6 +102,7 @@ function Session() {
             }
         });
     };
+
 
     const getSession = async (event) => {
         event.preventDefault();
@@ -102,6 +159,114 @@ function Session() {
                 </td>
                 <td>{item.creationDate}</td>
                 <td>
+
+
+                    <button
+                        className="flex justify-center bg-varxen-primaryPurple hover:bg-varxen-secundaryPurple text-gray-100 px-6 py-2 rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
+                        type="button"
+                        onClick={() => setShowModal(true)}
+                    >
+                        Test
+                    </button>
+                    {showModal ? (
+                        <>
+                            <div
+                                className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                            >
+                                <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                                    {/*content*/}
+                                    <div
+                                        className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                        {/*header*/}
+                                        <div
+                                            className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                                            <h3 className="font-semibold text-2xl text-gray-800 dark:text-white">
+                                                Configuration
+                                            </h3>
+                                            <button
+                                                className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                                                onClick={() => setShowModal(false)}
+                                            >
+                          <span
+                              className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                            ×
+                          </span>
+                                            </button>
+                                        </div>
+                                        {/*body*/}
+
+                                        <div className="relative p-6 flex-auto">
+                                            <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                                                <div className="popup-form">
+                                                    <div className="form-group">
+                                                        <label
+                                                            className="text-sm font-medium text-gray-700 tracking-wide dark:text-white">
+                                                            Enter weight:
+                                                        </label>
+                                                        <input
+                                                            className=" w-full bg-white text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-varxen-primaryPurple dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-secundaryPurple"
+                                                            type="text"
+                                                            name="weight"
+                                                            id="weight"
+                                                            placeholder="Enter a value equal or higher than one"
+                                                            value={weightValue}
+                                                            onChange={(e) => setWeightValue(e.target.value)}
+                                                        />
+                                                    </div>
+                                                    <div className="form-group">
+                                                        <label
+                                                            className="text-sm font-medium text-gray-700 tracking-wide dark:text-white">
+                                                            Select testing framework:
+                                                        </label>
+
+                                                        <select value={selectedOption}
+                                                                onChange={(e) => setSelectedOption(e.target.value)}
+                                                        >
+                                                            <option
+                                                                className="text-sm tracking-wide dark:text-white"
+                                                                value="locust">Locust
+                                                            </option>
+                                                            <option
+                                                                className="text-sm tracking-wide dark:text-white"
+                                                                value="opt2">Option 2
+                                                            </option>
+                                                            <option
+                                                                className="text-sm tracking-wide dark:text-white"
+                                                                value="opt3">Option 3
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </p>
+                                        </div>
+
+
+                                        {/*footer*/}
+                                        <div
+                                            className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                                            <button
+                                                className="text-primaryBlack background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                                type="button"
+                                                onClick={onClose}
+                                            >
+                                                Close
+                                            </button>
+                                            <button
+                                                className="bg-varxen-primaryPurple text-gray-100 font-semibold uppercase px-6 py-3 rounded-full shadow-lg bg-varxen-secundaryPurple mr-1 mb-1 ease-linear transition ease-in duration-500"
+                                                type="button"
+                                                onClick={() => createTest(item.sessionId)}
+                                            >
+                                                CREATE
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                        </>
+                    ) : null}
+
+
                     <button onClick={() => deleteSession(item.sessionId)}>
                         <MdDeleteForever fill="#FF0000" size={24}/>
                     </button>
@@ -137,12 +302,13 @@ function Session() {
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th onClick={orderByName} className="cursor-pointer">Name</th>
+                            <th>Name</th>
                             <th>Date</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>{tb_data}</tbody>
+
                     </table>
                 ) : (
                     <div>

@@ -119,43 +119,39 @@ function Session() {
                         </button>
                       </div>
                       {/*body*/}
+
                       <div className="relative p-6 flex-auto">
                         <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                          I always felt like I could do anything. That’s the main
-                          thing people are controlled by! Thoughts- their perception
-                          of themselves! They're slowed down by their perception of
-                          themselves. If you're taught you can’t do anything, you
-                          won’t do anything. I was taught I could do everything.
+                          <div className="popup-form">
+                            <div className="form-group">
+                              <label>Enter weight:</label>
+                              <input type="text" />
+                            </div>
+                            <div className="form-group">
+                              <label>Select testing framework:</label>
+                              <select>
+                                <option value="locust">Locust</option>
+                                <option value="opt2">Option 2</option>
+                                <option value="opt3">Option 3</option>
+                              </select>
+                            </div>
+                            <button>Submit</button>
+                          </div>
                         </p>
                       </div>
 
-                      <div className="popup-form">
-                        <div className="form-group">
-                          <label>Enter weight:</label>
-                          <input type="text" />
-                        </div>
-                        <div className="form-group">
-                          <label>Select testing framework:</label>
-                          <select>
-                            <option value="locust">Locust</option>
-                            <option value="opt2">Option 2</option>
-                            <option value="opt3">Option 3</option>
-                          </select>
-                        </div>
-                        <button>Submit</button>
-                      </div>
 
                       {/*footer*/}
                       <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                         <button
-                            className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            className="text-primaryBlack background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button"
                             onClick={() => setShowModal(false)}
                         >
                           Close
                         </button>
                         <button
-                            className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            className="bg-varxen-primaryPurple text-gray-100 font-semibold uppercase px-6 py-3 rounded-full shadow-lg bg-varxen-secundaryPurple mr-1 mb-1 ease-linear transition ease-in duration-500"
                             type="button"
                             onClick={() => setShowModal(false)}
                         >

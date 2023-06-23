@@ -48,6 +48,7 @@ function Session() {
     });
   };
 
+  //Constant that saves the value of the dropdown list
   const [selectedOption, setSelectedOption] = useState("LOCUST");
 
   //Constant that saves the value of the weight

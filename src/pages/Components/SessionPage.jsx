@@ -89,6 +89,13 @@ function Session() {
 
   };
 
+  //Cleans the fields on the pop-up when close button is clicked
+  const onClose = () =>{
+    setShowModal(false);
+    setSelectedOption('LOCUST');
+    setWeightValue("");
+  }
+
   //constants to show the pop-up
   const [showModal, setShowModal] = React.useState(false);
 
@@ -203,7 +210,7 @@ function Session() {
                         <button
                             className="text-primaryBlack background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button"
-                            onClick={() => setShowModal(false)}
+                            onClick={onClose}
                         >
                           Close
                         </button>

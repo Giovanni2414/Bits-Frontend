@@ -106,7 +106,7 @@ function Session() {
                     <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                       {/*header*/}
                       <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                        <h3 className="text-3xl font-semibold">
+                        <h3 className="font-semibold text-2xl text-gray-800 dark:text-white">
                           Configuration
                         </h3>
                         <button
@@ -124,8 +124,16 @@ function Session() {
                         <p className="my-4 text-slate-500 text-lg leading-relaxed">
                           <div className="popup-form">
                             <div className="form-group">
-                              <label>Enter weight:</label>
-                              <input type="text" />
+                              <label className="text-sm font-medium text-gray-700 tracking-wide dark:text-white">
+                                Enter weight:
+                              </label>
+                              <input
+                                  className=" w-full bg-white text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-varxen-primaryPurple dark:bg-white dark:text-neutral-600 dark:placeholder-neutral-300 dark:border-white dark:focus:border-varxen-secundaryPurple"
+                                  type="text"
+                                  name="weight"
+                                  id="weight"
+                                  placeholder="Enter a value equal or higher than one"
+                              />
                             </div>
                             <div className="form-group">
                               <label>Select testing framework:</label>

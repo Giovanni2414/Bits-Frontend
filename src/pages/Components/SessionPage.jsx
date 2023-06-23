@@ -46,6 +46,17 @@ function Session() {
     });
   };
 
+
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleTestClick = () => {
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
   const getSession = async (event) => {
     event.preventDefault();
 
@@ -84,7 +95,7 @@ function Session() {
         </td>
         <td>{item.creationDate}</td>
         <td>
-          <button>
+          <button onClick={handleTestClick}>
             <span>test</span>
           </button>
           <button onClick={() => deleteSession(item.sessionId)}>
@@ -128,6 +139,32 @@ function Session() {
               </tr>
             </thead>
             <tbody>{tb_data}</tbody>
+
+            {showPopup && (
+                <div className="popup">
+                  <div className="popup-content">
+            <span className="close" onClick={closePopup}>
+              &times;
+            </span>
+                    <div className="popup-form">
+                      <div className="form-group">
+                        <label>Enter weight:</label>
+                        <input type="text" />
+                      </div>
+                      <div className="form-group">
+                        <label>Select testing framework:</label>
+                        <select>
+                          <option value="locust">Locust</option>
+                          <option value="opt2">Option 2</option>
+                          <option value="opt3">Option 3</option>
+                        </select>
+                      </div>
+                      <button>Submit</button>
+                    </div>
+                  </div>
+                </div>
+            )}
+
           </table>
         ) : (
           <div>

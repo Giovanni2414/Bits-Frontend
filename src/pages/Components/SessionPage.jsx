@@ -6,7 +6,7 @@ import {
   MdOutlineWarningAmber,
 } from "react-icons/md";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import {createSearchParams, Link, useNavigate} from "react-router-dom";
 import {HttpStatusCode} from "axios";
 import {login} from "../../reducers/authSlice";
 
@@ -14,6 +14,7 @@ function Session() {
   const [session, setSession] = useState([]);
   const [search, setSearch] = useState("");
   const [isSearching, setIsSearching] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handlerSessions = async () => {
@@ -76,27 +77,15 @@ function Session() {
       setWeightValue("");
       return;
     }
-    const data = {
-      testingFrameworkPlatform:selectedOption,
-      weight:weightValue,
-      sessionId: sessionId
-    }
 
-    CRUDService.post(params, LOGIN).then((res) => {
-      let token = res.data.access_token
-      localStorage.setItem("token", token);
-      if (res.status === HttpStatusCode.Ok) {
-        const information = {
-          access_token: res.data.access_token,
-          expires_in: res.data.expires_in,
-          token_type: res.data.token_type,
-          username: res.data.username
-        }
-
-        dispatch(login(information))
-        navigate('VarxenPerformance/Session')
-      }
-    });
+    navigate({
+      pathname: "PerformanceTest",
+      search: createSearchParams({
+        testingFrameworkPlatform:selectedOption,
+        weight:weightValue,
+        sessionId: sessionId
+      }).toString()
+    })
 
   };
 

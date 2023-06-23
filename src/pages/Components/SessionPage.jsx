@@ -162,7 +162,7 @@ function Session() {
 
 
                     <button
-                        className="flex justify-center bg-varxen-primaryPurple hover:bg-varxen-secundaryPurple text-gray-100 px-6 py-2 rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
+                        className="justify-center bg-varxen-primaryPurple hover:bg-varxen-secundaryPurple text-gray-100 px-6 py-2 rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
                         type="button"
                         onClick={() => setShowModal(true)}
                     >
@@ -227,10 +227,12 @@ function Session() {
                                                                 value="locust">Locust
                                                             </option>
                                                             <option
+                                                                disabled
                                                                 className="text-sm tracking-wide dark:text-white"
                                                                 value="opt2">Option 2
                                                             </option>
                                                             <option
+                                                                disabled
                                                                 className="text-sm tracking-wide dark:text-white"
                                                                 value="opt3">Option 3
                                                             </option>

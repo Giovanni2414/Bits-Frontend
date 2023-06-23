@@ -89,9 +89,9 @@ function Session() {
         <td>{item.creationDate}</td>
         <td>
 
-          
+
           <button
-              className="w-full flex justify-center bg-varxen-primaryPurple hover:bg-varxen-secundaryPurple text-gray-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"                                type="button"
+              className="flex justify-center bg-varxen-primaryPurple hover:bg-varxen-secundaryPurple text-gray-100 px-6 py-2 rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"                                type="button"
               onClick={() => setShowModal(true)}
           >
             Test

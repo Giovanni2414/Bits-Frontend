@@ -136,14 +136,16 @@ function Session() {
                               />
                             </div>
                             <div className="form-group">
-                              <label>Select testing framework:</label>
+                              <label className="text-sm font-medium text-gray-700 tracking-wide dark:text-white">
+                                Select testing framework:
+                              </label>
                               <select>
-                                <option value="locust">Locust</option>
-                                <option value="opt2">Option 2</option>
-                                <option value="opt3">Option 3</option>
+
+                                <option className="text-sm tracking-wide dark:text-white" value="locust">Locust</option>
+                                <option className="text-sm tracking-wide dark:text-white" value="opt2">Option 2</option>
+                                <option className="text-sm tracking-wide dark:text-white" value="opt3">Option 3</option>
                               </select>
                             </div>
-                            <button>Submit</button>
                           </div>
                         </p>
                       </div>

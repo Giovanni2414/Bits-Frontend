@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CRUDService, SESSIONS, SESSIONS_NAME } from "../Services/axiosService";
+import {CRUDService, LOGIN, SESSIONS, SESSIONS_NAME} from "../Services/axiosService";
 import {
   MdDeleteForever,
   MdModeEdit,
@@ -7,6 +7,8 @@ import {
 } from "react-icons/md";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import {HttpStatusCode} from "axios";
+import {login} from "../../reducers/authSlice";
 
 function Session() {
   const [session, setSession] = useState([]);
@@ -46,7 +48,58 @@ function Session() {
     });
   };
 
+  const [selectedOption, setSelectedOption] = useState("LOCUST");
 
+  //Constant that saves the value of the weight
+  const [weightValue, setWeightValue] = useState("");
+
+  //Sends the info of the pop-up
+  const createTest = (sessionId) => {
+    setShowModal(false);
+    console.log(selectedOption," - ", weightValue);
+    if(selectedOption===""){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'You must select a framework'
+      })
+      setSelectedOption('LOCUST');
+      return;
+    }
+    if(weightValue<1){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Value must be equal or higher than one'
+      })
+      setWeightValue("");
+      return;
+    }
+    const data = {
+      testingFrameworkPlatform:selectedOption,
+      weight:weightValue,
+      sessionId: sessionId
+    }
+
+    CRUDService.post(params, LOGIN).then((res) => {
+      let token = res.data.access_token
+      localStorage.setItem("token", token);
+      if (res.status === HttpStatusCode.Ok) {
+        const information = {
+          access_token: res.data.access_token,
+          expires_in: res.data.expires_in,
+          token_type: res.data.token_type,
+          username: res.data.username
+        }
+
+        dispatch(login(information))
+        navigate('VarxenPerformance/Session')
+      }
+    });
+
+  };
+
+  //constants to show the pop-up
   const [showModal, setShowModal] = React.useState(false);
 
 
@@ -133,14 +186,18 @@ function Session() {
                                   name="weight"
                                   id="weight"
                                   placeholder="Enter a value equal or higher than one"
+                                  value={weightValue}
+                                  onChange={(e) => setWeightValue(e.target.value)}
                               />
                             </div>
                             <div className="form-group">
                               <label className="text-sm font-medium text-gray-700 tracking-wide dark:text-white">
                                 Select testing framework:
                               </label>
-                              <select>
 
+                              <select value={selectedOption}
+                                      onChange={(e) => setSelectedOption(e.target.value)}
+                              >
                                 <option className="text-sm tracking-wide dark:text-white" value="locust">Locust</option>
                                 <option className="text-sm tracking-wide dark:text-white" value="opt2">Option 2</option>
                                 <option className="text-sm tracking-wide dark:text-white" value="opt3">Option 3</option>
@@ -163,9 +220,9 @@ function Session() {
                         <button
                             className="bg-varxen-primaryPurple text-gray-100 font-semibold uppercase px-6 py-3 rounded-full shadow-lg bg-varxen-secundaryPurple mr-1 mb-1 ease-linear transition ease-in duration-500"
                             type="button"
-                            onClick={() => setShowModal(false)}
+                            onClick={()=>createTest(item.sessionId)}
                         >
-                          TEST
+                          CREATE
                         </button>
                       </div>
                     </div>

@@ -6,6 +6,7 @@ export const REGISTER = 'users'
 export const SESSIONS = 'sessions'
 export const BLOBS = 'blobs'
 export const SESSIONS_NAME = 'sessions/search'
+export const SESSIONS_USER = 'sessions/user-sessions'
 export const PERFORMANCE_TEST='performanceTest'
 
 

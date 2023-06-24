@@ -12,7 +12,7 @@ function Session() {
     const [isSearching, setIsSearching] = useState(false);
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.value);
-    const [selectedOption, setSelectedOption] = useState("LOCUST");
+    const [selectedOption, setSelectedOption] = useState("");
     const [weightValue, setWeightValue] = useState("");
 
 
@@ -22,7 +22,7 @@ function Session() {
             setSession(answer);
         };
         handlerSessions().catch(console.error);
-    }, [isSearching]);
+    }, [isSearching, user.username]);
 
     const saveSearchValue = (event) => {
         const {value} = event.target;
@@ -34,7 +34,6 @@ function Session() {
 
     //Sends the info of the pop-up
     const createTest = (sessionId) => {
-        console.log(selectedOption, " - ", weightValue);
         if (selectedOption === "") {
             Swal.fire({
                 icon: 'error',
@@ -67,7 +66,7 @@ function Session() {
 
     //Cleans the fields on the pop-up when close button is clicked
     const onClose = () => {
-        setSelectedOption('LOCUST');
+        setSelectedOption("");
         setWeightValue("");
     }
 
@@ -98,7 +97,7 @@ function Session() {
                 await Swal.fire({
                     icon: "error",
                     title: "Oops...",
-                    text: "The name entered does not exist!",
+                    text: "Does not exist a session with that name!",
                 });
             } else {
                 setSession(answer);
@@ -113,7 +112,7 @@ function Session() {
     };
 
     const orderByName = () => {
-        var sessionToOrder = JSON.parse(JSON.stringify(session))
+        const sessionToOrder = JSON.parse(JSON.stringify(session));
         sessionToOrder.sort(function (a, b) {
             var nameA = a.name.toUpperCase(); // Convertir a mayúsculas para comparación
             var nameB = b.name.toUpperCase();
@@ -129,8 +128,8 @@ function Session() {
         setSession(sessionToOrder)
     }
 
-    var count = 0;
-    let tb_data = session.map((item) => {
+    let count = 0;
+    const tb_data = session.map((item) => {
         count += 1;
         return (
             <tr key={item.sessionId}>
@@ -165,17 +164,21 @@ function Session() {
                                     <label>Weight</label>
                                     <input type="text" placeholder="Enter the test weight"
                                            className="input input-bordered input-primary w-full ml-4"
+                                           value={weightValue}
                                            onChange={(e) => setWeightValue(e.target.value)}/>
                                 </div>
                                 <select className="select select-primary w-full mt-4"
+                                        value={selectedOption}
                                         onChange={(e) => setSelectedOption(e.target.value)}>
-                                    <option disabled selected>Testing Framework</option>
+                                    <option value={""}>Testing Framework</option>
                                     <option value={"LOCUST"}>Locust</option>
                                 </select>
                             </div>
                             <div className="modal-action">
                                 <label htmlFor="my_modal_6"
-                                       className="btn bg-varxen-primaryPurple border-0 rounded-3xl px-6 hover:bg-varxen-secundaryPurple">Close!</label>
+                                       className="btn bg-varxen-primaryPurple border-0 rounded-3xl px-6 hover:bg-varxen-secundaryPurple"
+                                       onClick={onClose}
+                                >Close!</label>
                                 <button
                                     className={"btn bg-varxen-primaryPurple border-0 rounded-3xl hover:bg-varxen-secundaryPurple"}
                                     onClick={() => createTest(item.sessionId)}>Make Performance Test
@@ -190,7 +193,7 @@ function Session() {
 
     return (
         <div className={"container mx-auto"}>
-            <div className="m-3 flex-row">
+            <div className="my-3 mt-5 flex-row">
                 <form onSubmit={getSession} className={"grid grid-cols-10"}>
                     <input
                         type="text"
@@ -204,13 +207,13 @@ function Session() {
                     </button>
                 </form>
             </div>
-            <div className="overflow-x-auto w-full p-3">
+            <div className="mb-3 overflow-x-auto w-full">
                 {session.length !== 0 ? (
                     <table className="table w-full">
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
+                            <th className={"cursor-pointer"} onClick={orderByName}>Name</th>
                             <th>Date</th>
                             <th></th>
                         </tr>

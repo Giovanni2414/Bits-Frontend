@@ -34,7 +34,6 @@ function Session() {
 
     //Sends the info of the pop-up
     const createTest = (sessionId) => {
-        setShowModal(false);
         console.log(selectedOption, " - ", weightValue);
         if (selectedOption === "") {
             Swal.fire({
@@ -68,13 +67,9 @@ function Session() {
 
     //Cleans the fields on the pop-up when close button is clicked
     const onClose = () => {
-        setShowModal(false);
         setSelectedOption('LOCUST');
         setWeightValue("");
     }
-
-    //constants to show the pop-up
-    const [showModal, setShowModal] = React.useState(false);
 
 
     const deleteSession = async (sessionId) => {
@@ -97,11 +92,10 @@ function Session() {
 
     const getSession = async (event) => {
         event.preventDefault();
-
         if (search !== "") {
             const answer = await CRUDService.getOne(SESSIONS_NAME, search);
             if (answer.length === 0) {
-                Swal.fire({
+                await Swal.fire({
                     icon: "error",
                     title: "Oops...",
                     text: "The name entered does not exist!",
@@ -110,7 +104,7 @@ function Session() {
                 setSession(answer);
             }
         } else {
-            Swal.fire(
+            await Swal.fire(
                 "Do you want to search?",
                 "You must enter a session name to be able to search for it.",
                 "question"
@@ -149,7 +143,7 @@ function Session() {
                     </div>
                 </td>
                 <td>{item.creationDate}</td>
-                <td>
+                <td className={"text-end"}>
                     <button onClick={() => deleteSession(item.sessionId)}>
                         <MdDeleteForever fill="#FF0000" size={24}/>
                     </button>
@@ -162,7 +156,7 @@ function Session() {
                         modal</label>
                     <input type="checkbox" id="my_modal_6" className="modal-toggle"/>
                     <div className="modal">
-                        <div className="modal-box mx-4">
+                        <div className="modal-box mx-4 text-left">
                             <h3 className="font-bold text-3xl">Test Configuration!</h3>
                             <p className="my-3 text-lg">Please enter you configuration</p>
                             <div className="divider"></div>
@@ -176,7 +170,7 @@ function Session() {
                                 <select className="select select-primary w-full mt-4"
                                         onChange={(e) => setSelectedOption(e.target.value)}>
                                     <option disabled selected>Testing Framework</option>
-                                    <option>Locust</option>
+                                    <option value={"LOCUST"}>Locust</option>
                                 </select>
                             </div>
                             <div className="modal-action">
@@ -195,17 +189,17 @@ function Session() {
     });
 
     return (
-        <div>
+        <div className={"container mx-auto"}>
             <div className="m-3 flex-row">
-                <form onSubmit={getSession}>
+                <form onSubmit={getSession} className={"grid grid-cols-10"}>
                     <input
                         type="text"
                         placeholder="Search session"
-                        className="input input-bordered w-11/12 rounded-3xl mr-3"
+                        className="input input-bordered rounded-3xl mr-3 col-span-8"
                         name="searchInput"
                         onChange={saveSearchValue}
                     />
-                    <button type="submit" className="btn rounded-3xl">
+                    <button type="submit" className="btn rounded-3xl col-span-2">
                         Search
                     </button>
                 </form>

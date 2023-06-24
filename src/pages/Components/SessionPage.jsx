@@ -158,8 +158,7 @@ function Session() {
                             <MdModeEdit fill="#8b8d90" size={24}/>
                         </button>
                     </Link>
-                    <label htmlFor="my_modal_6" className="btn rounded-3xl bg-varxen-primaryPurple  mx-2 border-0">open
-                        modal</label>
+                    <label htmlFor="my_modal_6" className="btn rounded-3xl bg-varxen-primaryPurple  mx-2 border-0">Performance test</label>
                     <input type="checkbox" id="my_modal_6" className="modal-toggle"/>
                     <div className="modal">
                         <div className="modal-box mx-4">

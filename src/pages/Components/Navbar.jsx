@@ -9,15 +9,13 @@ function Navbar() {
   const dispatch = useDispatch()
 
   const logoutAction = () => {
-    
     dispatch(logout())
-    navigate('/')
   }
 
   return (
     <div>
       <nav className="bg-varxen-primaryPurple border-gray-200 dark:bg-varxen-secondaryPurple">
-          <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+          <div className="container flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="https://www.varxen.com/" className="flex items-center bg-white dark:bg-varxen-primaryBlack rounded-2xl p-2">
               <img
                 src="../images/logo-varxenB-vector-only.svg"

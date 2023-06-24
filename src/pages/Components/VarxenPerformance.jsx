@@ -1,17 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import Navbar from "./Navbar";
 import { Outlet } from "react-router-dom";
 
 
-class VarxenPerformance extends Component {
-  render() {
+const VarxenPerformance = () => {
     return (
-      <div>
+      <>
         <Navbar/>
         <Outlet/>
-      </div>
+      </>
     );
-  }
 }
 
 export default VarxenPerformance;

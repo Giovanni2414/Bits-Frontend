@@ -12,7 +12,7 @@ function Session() {
     const [isSearching, setIsSearching] = useState(false);
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.value);
-    const [selectedOption, setSelectedOption] = useState("LOCUST");
+    const [selectedOption, setSelectedOption] = useState("");
     const [weightValue, setWeightValue] = useState("");
 
 
@@ -22,7 +22,7 @@ function Session() {
             setSession(answer);
         };
         handlerSessions().catch(console.error);
-    }, [isSearching]);
+    }, [isSearching, user.username]);
 
     const saveSearchValue = (event) => {
         const {value} = event.target;
@@ -34,8 +34,6 @@ function Session() {
 
     //Sends the info of the pop-up
     const createTest = (sessionId) => {
-        setShowModal(false);
-        console.log(selectedOption, " - ", weightValue);
         if (selectedOption === "") {
             Swal.fire({
                 icon: 'error',
@@ -68,13 +66,9 @@ function Session() {
 
     //Cleans the fields on the pop-up when close button is clicked
     const onClose = () => {
-        setShowModal(false);
-        setSelectedOption('LOCUST');
+        setSelectedOption("");
         setWeightValue("");
     }
-
-    //constants to show the pop-up
-    const [showModal, setShowModal] = React.useState(false);
 
 
     const deleteSession = async (sessionId) => {
@@ -97,20 +91,19 @@ function Session() {
 
     const getSession = async (event) => {
         event.preventDefault();
-
         if (search !== "") {
             const answer = await CRUDService.getOne(SESSIONS_NAME, search);
             if (answer.length === 0) {
-                Swal.fire({
+                await Swal.fire({
                     icon: "error",
                     title: "Oops...",
-                    text: "The name entered does not exist!",
+                    text: "Does not exist a session with that name!",
                 });
             } else {
                 setSession(answer);
             }
         } else {
-            Swal.fire(
+            await Swal.fire(
                 "Do you want to search?",
                 "You must enter a session name to be able to search for it.",
                 "question"
@@ -119,7 +112,7 @@ function Session() {
     };
 
     const orderByName = () => {
-        var sessionToOrder = JSON.parse(JSON.stringify(session))
+        const sessionToOrder = JSON.parse(JSON.stringify(session));
         sessionToOrder.sort(function (a, b) {
             var nameA = a.name.toUpperCase(); // Convertir a mayúsculas para comparación
             var nameB = b.name.toUpperCase();
@@ -135,8 +128,8 @@ function Session() {
         setSession(sessionToOrder)
     }
 
-    var count = 0;
-    let tb_data = session.map((item) => {
+    let count = 0;
+    const tb_data = session.map((item) => {
         count += 1;
         return (
             <tr key={item.sessionId}>
@@ -149,7 +142,7 @@ function Session() {
                     </div>
                 </td>
                 <td>{item.creationDate}</td>
-                <td>
+                <td className={"text-end"}>
                     <button onClick={() => deleteSession(item.sessionId)}>
                         <MdDeleteForever fill="#FF0000" size={24}/>
                     </button>
@@ -161,7 +154,7 @@ function Session() {
                     <label htmlFor="my_modal_6" className="btn rounded-3xl bg-varxen-primaryPurple  mx-2 border-0">Performance test</label>
                     <input type="checkbox" id="my_modal_6" className="modal-toggle"/>
                     <div className="modal">
-                        <div className="modal-box mx-4">
+                        <div className="modal-box mx-4 text-left">
                             <h3 className="font-bold text-3xl">Test Configuration!</h3>
                             <p className="my-3 text-lg">Please enter you configuration</p>
                             <div className="divider"></div>
@@ -170,17 +163,21 @@ function Session() {
                                     <label>Weight</label>
                                     <input type="text" placeholder="Enter the test weight"
                                            className="input input-bordered input-primary w-full ml-4"
+                                           value={weightValue}
                                            onChange={(e) => setWeightValue(e.target.value)}/>
                                 </div>
                                 <select className="select select-primary w-full mt-4"
+                                        value={selectedOption}
                                         onChange={(e) => setSelectedOption(e.target.value)}>
-                                    <option disabled selected>Testing Framework</option>
-                                    <option>Locust</option>
+                                    <option value={""}>Testing Framework</option>
+                                    <option value={"LOCUST"}>Locust</option>
                                 </select>
                             </div>
                             <div className="modal-action">
                                 <label htmlFor="my_modal_6"
-                                       className="btn bg-varxen-primaryPurple border-0 rounded-3xl px-6 hover:bg-varxen-secundaryPurple">Close!</label>
+                                       className="btn bg-varxen-primaryPurple border-0 rounded-3xl px-6 hover:bg-varxen-secundaryPurple"
+                                       onClick={onClose}
+                                >Close!</label>
                                 <button
                                     className={"btn bg-varxen-primaryPurple border-0 rounded-3xl hover:bg-varxen-secundaryPurple"}
                                     onClick={() => createTest(item.sessionId)}>Make Performance Test
@@ -194,28 +191,28 @@ function Session() {
     });
 
     return (
-        <div>
-            <div className="m-3 flex-row">
-                <form onSubmit={getSession}>
+        <div className={"container mx-auto"}>
+            <div className="my-3 mt-5 flex-row">
+                <form onSubmit={getSession} className={"grid grid-cols-10"}>
                     <input
                         type="text"
                         placeholder="Search session"
-                        className="input input-bordered w-11/12 rounded-3xl mr-3"
+                        className="input input-bordered rounded-3xl mr-3 col-span-8"
                         name="searchInput"
                         onChange={saveSearchValue}
                     />
-                    <button type="submit" className="btn rounded-3xl">
+                    <button type="submit" className="btn rounded-3xl col-span-2">
                         Search
                     </button>
                 </form>
             </div>
-            <div className="overflow-x-auto w-full p-3">
+            <div className="mb-3 overflow-x-auto w-full">
                 {session.length !== 0 ? (
                     <table className="table w-full">
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
+                            <th className={"cursor-pointer"} onClick={orderByName}>Name</th>
                             <th>Date</th>
                             <th></th>
                         </tr>

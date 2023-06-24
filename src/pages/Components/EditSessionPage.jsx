@@ -28,7 +28,7 @@ const EditSessionPage = () => {
     };
 
     getSession().catch(console.error);
-  }, []);
+  }, [sessionId]);
 
   const compareArrays = (a, b) => {
     return JSON.stringify(a) === JSON.stringify(b);
@@ -141,7 +141,7 @@ const EditSessionPage = () => {
   return (
     <>
       {session ? (
-        <div className="m-5">
+        <div className="m-5 container mx-auto">
           <div className="flex justify-between">
             <div>
               <div className="text-5xl">{session.name}</div>
